@@ -1,0 +1,1001 @@
+/* --- GRUNDEINSTELLUNGEN --- */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    overflow-x: hidden; /* Verhindert seitliches Scrollen */
+}
+
+/* --- DER HINTERGRUND TRICK --- */
+/* Wir machen einen Layer, der fixiert im Hintergrund liegt */
+.background-split {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Hier passiert die Magie: 40% Braun links, 60% Weiß rechts */
+    background: linear-gradient(to right, #b3aaa2 0%, #b3aaa2 40%, #ffffff 40%, #ffffff 100%);
+}
+
+/* HINWEIS: #eaddcf ist das Beige aus dem Bild. 
+   Wenn du dein Braun willst, nimm #3b2e2a */
+
+/* --- LAYOUT WRAPPER --- */
+.main-wrapper {
+    min-height: 100vh; /* Mindestens so hoch wie der Bildschirm */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Header oben, Footer unten, Inhalt Mitte */
+}
+
+/* --- HEADER & FOOTER --- */
+.top-nav {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-nav nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.logo { font-weight: bold; font-size: 1.2em; color: #3b2e2a; }
+.top-nav a { text-decoration: none; color: #333; font-weight: 700; font-size: 1.1em; letter-spacing: 0.5px;}
+
+.bottom-footer {
+    padding: 20px 50px;
+    text-align: right;
+    font-size: 0.8em;
+    color: #999;
+}
+
+/* --- ZENTRALER INHALT (Das Herzstück) --- */
+.center-content {
+    display: flex;
+    align-items: center; /* Vertikal mittig! */
+    justify-content: center; /* Horizontal mittig */
+    gap: 80px; /* Abstand zwischen Karte und Text */
+    padding: 0 20px;
+    flex-wrap: wrap; /* Damit es auf Handy umbricht */
+}
+
+/* --- DIE SCHWEBENDE KARTE --- */
+.profile-card {
+    background-color: #ffffff; /* Hartes Weiß statt Beige */
+    width: 400px;
+    padding: 50px;
+    text-align: center;
+    
+    /* Ein kleiner Trick für den "Overlap" Look, falls nötig */
+    position: relative; 
+    /* Eckigere Kanten wirken technischer */
+    border-radius: 4px; 
+    border: 1px solid #e0e0e0; /* Feiner grauer Rahmen */
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+}
+
+.photo-container {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Optional: Grauer Hintergrund falls Bild lädt */
+    background-color: #ccc; 
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-card h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.8em;
+    margin: 10px 0;
+    line-height: 1.2;
+    color: #000;
+}
+
+.separator-line {
+    width: 40px;
+    height: 2px;
+    background-color: #b3aaa2; /* Kleiner blauer Akzent wie im Bild */
+    margin: 15px auto;
+}
+
+.job-title {
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: #333; /* Farbe für Text-Links (wie LI / MAIL) */
+  font-size: 0.9em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s;
+}
+
+.social-icons img {
+  height: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+.social-icons {
+  display: flex; /* Macht, dass alles nebeneinander steht */
+    justify-content: center; /* Zentriert die Icons in der Karte */
+    align-items: center; /* Zentriert sie vertikal auf einer Linie */
+    gap: 20px; /* Abstand zwischen den Icons */
+    margin-top: 30px; /* Etwas Abstand nach oben zum "STUDENT..." Text */
+}
+/* Kleiner Hover-Effekt */
+.social-icons a:hover {
+    opacity: 0.6; /* Wird beim Drüberfahren leicht transparent */
+}
+
+/* --- DER TEXT BEREICH (Rechts) --- */
+.text-area {
+    max-width: 450px;
+}
+
+.big-headline {
+    font-family: 'Roboto Slab', serif;
+    font-size: 4em; /* Riesiges "Hallo" */
+    margin: 0 0 10px 0;
+    line-height: 1;
+}
+
+.sub-headline {
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.button-group {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+
+    border-radius: 4px; /* Fast eckig (wie App-Buttons) */
+    text-transform: uppercase; /* MACHT ALLES GROSS (wirkt stärker) */
+    letter-spacing: 1px;
+    font-size: 0.8em;
+}
+
+.btn:hover { transform: translateY(-3px); }
+
+/* Gefüllter Button (Blau wie im Bild oder Braun) */
+.btn-filled {
+    background-color: #b3aaa2; /* Ein tiefes Dunkelblau/Grau (Seriös) */
+    color: white;
+    box-shadow: 0 4px 10px rgba(179, 170, 162, 0.4);
+}
+
+/* Outline Button */
+.btn-outline {
+    border: 1px solid #333;
+    color: #333;
+}
+
+.intro-text {
+    line-height: 1.8;
+    color: #666;
+    font-size: 0.95em;
+}
+
+/* --- LOGO CONTAINER (Der Käfig) --- */
+.logo-container {
+    display: block;
+    position: relative; /* Wichtig: Der Ankerpunkt für die Bilder */
+    
+    /* Wir passen die Größe an das Format deiner Zeichnung an */
+    width: 60px;  
+    height: 72px; /* Etwas höher, damit nichts abgeschnitten wird */
+    
+    color: #3b2e2a; /* Deine Farbe (oder #2c3e50) */
+}
+
+/* --- DIE SVG BILDER (Der Inhalt) --- */
+.logo-svg {
+    position: absolute; /* WICHTIG: Nimmt die Bilder aus dem Fluss */
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    
+    /* Damit wird die Farbe übernommen */
+    fill: currentColor; 
+    stroke: currentColor;
+    
+    /* Weicher Übergang */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* --- ZUSTAND 1: NORMAL (K sichtbar) --- */
+.logo-default {
+    opacity: 1;
+    z-index: 1; /* Liegt unten */
+}
+
+/* --- ZUSTAND 2: KATZE (Erstmal unsichtbar) --- */
+.logo-hover {
+    opacity: 0;
+    z-index: 2; /* Liegt oben drauf */
+}
+
+/* --- DER HOVER EFFEKT --- */
+.logo-container:hover .logo-default {
+    opacity: 0;
+}
+
+.logo-container:hover .logo-hover {
+    opacity: 1;
+}
+
+
+/* --- PROJEKTE SEITE STYLING --- */
+
+/* Intro Bereich oben */
+.page-intro {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fafafa; /* Ganz leichtes Grau zur Abhebung */
+    border-bottom: 1px solid #eee;
+    margin-bottom: 50px;
+}
+
+.page-intro h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.intro-subtitle {
+    color: #666;
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Aktiver Link in der Navi */
+.active-link {
+    color: #3b2e2a !important; /* Dein Braunton */
+    border-bottom: 2px solid #3b2e2a;
+}
+
+/* Das Grid System */
+.project-grid {
+    display: grid;
+    /* Automatische Spalten: Mindestens 350px breit, sonst passend verteilen */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 30px;
+    padding-bottom: 100px; /* Abstand zum Footer */
+}
+
+/* Die einzelne Karte */
+.project-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 30px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column; /* Damit Footer unten bündig ist */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-color: #b3aaa2; /* Dein Taupe beim Hover */
+}
+
+/* Karte Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.4em;
+    margin: 0;
+    color: #222;
+    line-height: 1.3;
+}
+
+.year-badge {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #999;
+    background: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Beschreibungstext */
+.card-desc {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Schiebt die Links nach ganz unten */
+}
+
+/* Tech Stack Tags (Die kleinen Pillen) */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.tech-stack span {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: #f4f4f4;
+    color: #666;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Links unten auf der Karte */
+.card-links {
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 20px;
+}
+
+.card-links a {
+    text-decoration: none;
+    color: #3b2e2a; /* Dein Braun */
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.card-links a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* --- LEBENSLAUF STYLE (Academic Paper Look) --- */
+
+.resume-container {
+    max-width: 800px; /* Die Breite eines A4 Blattes im Web */
+    margin: 0 auto;   /* Zentriert */
+    padding: 60px 20px;
+}
+
+/* KOPFBEREICH */
+.resume-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.resume-header h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.resume-subtitle {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.resume-contact {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.btn-download {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: 1px solid #ddd;
+}
+
+.btn-download:hover {
+    background-color: #3b2e2a; /* Dein Braun */
+    color: #fff;
+    border-color: #3b2e2a;
+}
+
+/* TRENNLINIE */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 40px 0;
+}
+
+/* ABSCHNITTE */
+.resume-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.5em;
+    color: #3b2e2a; /* Akzentfarbe für Überschriften */
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* DAS LAYOUT (Links Datum, Rechts Inhalt) */
+.resume-item {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.resume-date {
+    width: 160px; /* Feste Breite für das Datum links */
+    flex-shrink: 0; /* Darf nicht kleiner werden */
+    font-weight: 600;
+    color: #999;
+    font-size: 0.95em;
+    padding-top: 4px; /* Optische Korrektur */
+}
+
+.resume-content {
+    flex-grow: 1;
+}
+
+.resume-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: #222;
+}
+
+.institution {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+/* SKILLS GRID (3 Spalten Layout für Skills) */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.skill-category h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.skill-category p {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+
+/* --- MAGIC SWAP ANIMATION --- */
+
+.nav-swap {
+    position: relative;
+    display: inline-flex;
+    justify-content: center; /* Zentriert Inhalt horizontal */
+    align-items: center;     /* Zentriert Inhalt vertikal */
+    
+    /* WICHTIG: Feste Breite reservieren, damit nichts wackelt */
+    width: 100px; 
+    height: 80px; 
+    
+    text-decoration: none;
+    overflow: visible; /* Sicherheitshalber, falls das Gesicht groß ist */
+}
+
+/* 1. Der Text "Kontakt" */
+.nav-text {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    display: block;
+}
+
+/* 2. Das Gesicht (Erstmal unsichtbar) */
+.hover-face {
+    position: absolute; /* Liegt genau über dem Text */
+    width: 40px;        /* Größe anpassen */
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0) rotate(-20deg); /* Klein und gedreht */
+    
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncig! */
+}
+
+/* --- DER HOVER EFFEKT --- */
+
+/* Wenn man drüber fährt -> Text weg */
+.nav-swap:hover .nav-text {
+    opacity: 0;
+    transform: scale(0.5); /* Schrumpft weg */
+}
+
+/* Wenn man drüber fährt -> Gesicht her */
+.nav-swap:hover .hover-face {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) rotate(0deg); /* Ploppt auf normale Größe */
+}
+
+
+/* --- CODE STYLE HOVER --- */
+
+nav > a:not(.nav-swap):not(.logo-container) {
+    position: relative;
+    transition: color 0.3s;
+}
+
+/* Linke Klammer { */
+nav > a:not(.nav-swap):not(.logo-container)::before {
+    content: '{';
+    position: absolute;
+    left: -15px; /* Links neben dem Wort */
+    opacity: 0;
+    color: #635852;
+    transition: all 0.3s ease;
+    transform: translateX(10px); /* Rutscht beim Erscheinen rein */
+}
+
+/* Rechte Klammer } */
+nav > a:not(.nav-swap):not(.logo-container)::after {
+    content: '}';
+    position: absolute;
+    right: -15px; /* Rechts neben dem Wort */
+    opacity: 0;
+    color: #635852;
+    transition: all 0.3s ease;
+    transform: translateX(-10px); /* Rutscht beim Erscheinen rein */
+}
+
+/* Hover Zustand */
+nav > a:not(.nav-swap):not(.logo-container):hover {
+    color: #635852;
+}
+
+nav > a:not(.nav-swap):not(.logo-container):hover::before {
+    opacity: 1;
+    transform: translateX(0); /* An die richtige Stelle rutschen */
+}
+
+nav > a:not(.nav-swap):not(.logo-container):hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- DER NEUE PROFESSIONELLE FOOTER --- */
+
+.site-footer {
+    background-color: #fafafa; /* Ganz helles Grau zur Abgrenzung */
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    padding: 60px 20px 30px 20px; /* Viel Platz oben */
+    margin-top: 80px; /* Abstand zum Inhalt darüber */
+}
+
+/* Teil 1: Gesicht & Text */
+.footer-face {
+    width: 70px;
+    transform: rotate(-10deg);
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.footer-face-link:hover .footer-face {
+    transform: rotate(0deg) scale(1.1); /* Kleiner Wackel-Effekt beim Hover */
+}
+
+.site-footer h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #333;
+}
+
+.site-footer p {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Teil 2: Kontakt Links */
+.footer-contact {
+    margin-bottom: 40px;
+}
+
+.footer-mail {
+    display: block; /* E-Mail in eigener Zeile */
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #635852; /* Dein Marken-Braun */
+    text-decoration: none;
+    margin-bottom: 15px;
+    transition: color 0.2s;
+}
+
+.footer-mail:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    color: #999; /* Farbe für den Punkt dazwischen */
+}
+
+.footer-socials a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.footer-socials a:hover {
+    color: #635852;
+}
+
+/* Teil 3: Copyright */
+.footer-bottom {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 0.8em;
+    color: #aaa;
+    margin: 0;
+}
+
+/* --- BAUSTELLEN HINWEIS --- */
+.construction-badge {
+    display: inline-block;       /* Damit der Kasten nur so breit wie der Text ist */
+    margin-top: 25px;            /* Abstand nach oben */
+    padding: 8px 20px;           /* Platz innen */
+    
+    background-color: #fafafa;   /* Ganz leichtes Grau */
+    color: #635852;              /* Dein Marken-Braun */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;   /* Großbuchstaben wirken offizieller */
+    letter-spacing: 1px;
+    
+    /* Der "Entwurf"-Look */
+    border: 1px dashed #ccc;     
+    border-radius: 4px;
+}
+
+/* --- NEUES ZWEISPALTIGES LAYOUT --- */
+
+/* Der Hintergrund hinter dem Papier */
+.resume-wrapper {
+    background-color: #f0f0f0; /* Hellgrauer Tisch-Hintergrund */
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Das "Papier" selbst */
+.resume-paper {
+    background-color: white;
+    width: 100%;
+    max-width: 900px; /* A4-ähnliche Breite */
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Links 300px, Rechts der Rest */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Schöner Schatten für Tiefe */
+    border-radius: 4px;
+    overflow: hidden; /* Damit Ecken rund bleiben */
+}
+
+/* --- LINKE SPALTE (SIDEBAR) --- */
+.resume-sidebar {
+    background-color: #3b3330; /* Sehr dunkles Braun (Fast Schwarz) */
+    color: #eaddcf; /* Helles Beige für Text */
+    padding: 40px 30px;
+}
+
+.sidebar-header h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2.5em;
+    margin: 0;
+    line-height: 1;
+    color: #fff;
+}
+
+.sidebar-role {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b3aaa2;
+    margin-bottom: 40px;
+}
+
+.sidebar-section {
+    margin-bottom: 35px;
+}
+
+.sidebar-section h3 {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #554d4a;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.sidebar-info p, .sidebar-info a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.sidebar-text {
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-list li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #ccc;
+}
+
+.btn-sidebar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #635852;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.btn-sidebar:hover { background-color: #7a6e67; }
+
+/* --- RECHTE SPALTE (MAIN) --- */
+.resume-main-content {
+    padding: 40px 50px;
+    background-color: #fff;
+}
+
+.main-title {
+    font-family: 'Roboto Slab', serif;
+    color: #635852; /* Dein Marken-Braun */
+    font-size: 1.8em;
+    margin-bottom: 30px;
+}
+
+/* TIMELINE DESIGN */
+.timeline-item {
+    display: flex; /* Datum links, Inhalt rechts */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Die vertikale Linie */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 135px; /* Position der Linie */
+    top: 5px;
+    bottom: -35px; /* Linie geht bis zum nächsten Item */
+    width: 2px;
+    background-color: #f0f0f0;
+}
+.timeline-item:last-child::before { display: none; } /* Keine Linie beim letzten */
+
+/* Der Punkt auf der Linie */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 131px; /* Genau auf der Linie */
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #635852;
+    border: 2px solid #fff; /* Weißer Rand */
+}
+
+.timeline-date {
+    width: 120px; /* Feste Breite für Datum */
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #635852;
+    text-align: right;
+    padding-right: 30px; /* Abstand zur Linie */
+}
+
+.timeline-content {
+    padding-left: 30px; /* Abstand von der Linie */
+}
+
+.timeline-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: #222;
+}
+
+.timeline-content .company {
+    display: block;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95em;
+}
+
+.main-divider {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+}
+
+/* Interesens Tags */
+.interests-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.interests-container span {
+    background: #f9f9f9;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: #555;
+    border: 1px solid #eee;
+}
+
+/* HANDY ANPASSUNG */
+@media (max-width: 800px) {
+    .resume-paper {
+        grid-template-columns: 1fr; /* Alles untereinander */
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-item::before, .timeline-item::after {
+        display: none; /* Keine Linie auf dem Handy */
+    }
+    
+    .timeline-date {
+        text-align: left;
+        margin-bottom: 5px;
+        color: #999;
+    }
+    
+    .timeline-content {
+        padding-left: 0;
+        border-left: 2px solid #eee;
+        padding-left: 15px;
+    }
+}
+
+/* HANDY ANSICHT */
+@media (max-width: 600px) {
+    .resume-item {
+        flex-direction: column; /* Datum über den Text schieben */
+    }
+    
+    .resume-date {
+        margin-bottom: 5px;
+        color: #3b2e2a; /* Farbe ändern, damit man es besser sieht */
+    }
+
+    .resume-contact {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+
+}
+
+/* --- HANDY ANPASSUNG --- */
+@media (max-width: 900px) {
+    .background-split {
+        background: #eaddcf; /* Auf Handy nur eine Farbe im Hintergrund */
+    }
+    
+    .center-content {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .photo-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .button-group {
+        justify-content: center;
+    }
+}
